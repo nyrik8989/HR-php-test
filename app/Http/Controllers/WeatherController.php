@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\Weather\Base\WeatherServiceInterface;
 use Illuminate\Http\Request;
 
-class Weather extends Controller
+class WeatherController extends Controller
 {
     /**
      * @var WeatherServiceInterface
@@ -20,9 +20,9 @@ class Weather extends Controller
     public function index(Request $request)
     {
         $weather = $this->weather_service->getCurrentTempInCity(
-            $request->get('city', 'Брянск')
+            $cityName = $request->get('city', 'Брянск')
         );
 
-        return view('weather.index', ['weather' => $weather]);
+        return view('weather.index', compact('weather', 'cityName'));
     }
 }
